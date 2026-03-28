@@ -34,7 +34,7 @@ urlpatterns = [
     # Access to get/path/del methods related to a specific finished project
     path("finished-projects/<int:finished_pk>/", FinishedProjectDetail.as_view(), name="finished-project-detail"),
 
-    ##Likes
+    ## Likes
     # Toggling a user's like on Project Ideas
     path("project-ideas/<int:idea_pk>/like/", ProjectIdeaToggleLike.as_view(), name="project-idea-like"),
     # Toggling a user's like on Finished Projects
