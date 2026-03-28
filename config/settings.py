@@ -19,7 +19,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media') 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 env_path = os.path.join(BASE_DIR, '.env')
 load_dotenv(env_path)
@@ -28,7 +28,7 @@ load_dotenv(env_path)
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# the second key is a fallback for eg. the github CI 
+# the second key is a fallback for eg. the github CI
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '6niu^40cw#4#@ozotbp&e8t!nxwoi-*wm@0xjl&0vyp@apdyrn')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -208,4 +208,3 @@ STORAGES = {
 HOST = "http://127.0.0.1:8000/"
 
 DEFAULT_PROFILE_IMAGE_URL = f"{MEDIA_URL}profile_images/default.jpg"
-
