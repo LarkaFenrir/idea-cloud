@@ -109,7 +109,7 @@ def register(request):
                 error_list.append(f"{key}: {value[0]}")
 
             messages.error(request, str(" ".join(error_list)))
- 
+
     registration_form = RegisterForm()
     return render(request, "register.html", {"form": registration_form})
 
@@ -126,7 +126,7 @@ def user_delete(request, user_id):
         messages.success(request, f"Account '{user.username}' has been successfully deleted.")
 
         return redirect("front-end:register")
-    return redirect( "front-end:user-profile")
+    return redirect("front-end:user-profile")
 
 @login_required(login_url="front-end:login")
 def user_profile(request):
@@ -267,7 +267,7 @@ def public_user_profile(request, user_id):
 
 @login_required(login_url="front-end:login")
 def user_availability(request, user_id):
-    user  = get_object_or_404(User, pk=user_id)
+    user = get_object_or_404(User, pk=user_id)
     if request.user == user:
         if not user.available:
             user.available = True
@@ -466,7 +466,7 @@ def search_projects(request):
         if raw_query:
             project_ideas = ProjectIdea.objects.filter(title__icontains=raw_query)
 
-            # same structure as project_ideas 
+            # same structure as project_ideas
             idea_list = []
             for idea in project_ideas:
                 images = idea.images_projects.all()
@@ -484,7 +484,7 @@ def search_projects(request):
             idea_list = []
             messages.error(request, 'Please enter a search term')
 
-        return render(request, "search_results.html", {"ideas": idea_list,"search_term": raw_query})
+        return render(request, "search_results.html", {"ideas": idea_list, "search_term": raw_query})
 
     # GET request - show empty search page
     return render(request, "search_results.html")
