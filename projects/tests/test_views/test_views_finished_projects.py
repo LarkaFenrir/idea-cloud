@@ -53,7 +53,7 @@ class FinishedProjectsListTests(APITestCase):
         # ensure we are not logged in to test the 'has_liked=False' guest logic
         self.client.logout()
 
-        # create a second finished project using the second group 
+        # create a second finished project using the second group
         FinishedProject.objects.create(
             title="Second Finished Project",
             description="Testing views",
