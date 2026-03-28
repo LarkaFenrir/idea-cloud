@@ -180,9 +180,9 @@ class FinishedProjectSerializerTests(TestCase):
         data = {"title": "Modified Title"}
 
         serializer = FinishedProjectSerializer(
-            instance=self.finished_project, 
-            data=data, 
-            context=self.context2, 
+            instance=self.finished_project,
+            data=data,
+            context=self.context2,
             partial=True
         )
         self.assertTrue(serializer.is_valid())
