@@ -35,7 +35,7 @@ from .views import (
     group_details,
     join_group,
     leave_group,
-    user_availability, 
+    user_availability,
     search_projects,
     user_delete
 )
@@ -62,7 +62,7 @@ urlpatterns = [
     path("saved_projects/", saved_projects, name="saved-projects"),
     path("project_details/<int:pk>/add_saved", add_saved_project, name="add-saved"),
     path("project_details/<int:pk>/remove_saved", remove_saved_project, name="remove-saved"),
-    #delete 
+    # delete
     path("delete_project/<int:pk>", delete_project, name="delete-project"),
     # like
     path("project_details/<int:pk>/add_like", add_like, name="add-like"),
