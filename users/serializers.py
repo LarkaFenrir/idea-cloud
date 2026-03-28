@@ -69,8 +69,8 @@ class UserSerializer(serializers.ModelSerializer):
             data['last_name'] = strip_tags(data['last_name']).strip()
         if 'description' in data:
             data['description'] = strip_tags(data['description']).strip()
-            
-        # Handle base64 image if present. Check to see if image is URL. 
+
+        # Handle base64 image if present. Check to see if image is URL.
         if data.get("image"):
             try:
                 data["image"] = base64_to_image(data["image"])
@@ -78,7 +78,7 @@ class UserSerializer(serializers.ModelSerializer):
                 raise ValidationError({"error": "Invalid image format. Image has to be jpg."})
 
         return super().to_internal_value(data)
-    
+
     def validate_username(self, value):
         """
         Validate username uniqueness:
@@ -87,21 +87,21 @@ class UserSerializer(serializers.ModelSerializer):
         """
         # Check if any user has this username
         existing_user = User.objects.filter(username=value).first()
-        
+
         # If this is a new user (no instance)
         if not self.instance:
             if existing_user:
                 raise serializers.ValidationError('Duplicate username.')
-        
+
         # If this is an update (has instance)
         else:
             # If username exists AND it belongs to a DIFFERENT user
             if existing_user and existing_user.id != self.instance.id:
                 raise serializers.ValidationError('This username is already taken by another user.')
-        
+
         # Always return the value
         return value
-                
+
     def validate_email(self, value):
         """
         Validate email uniqueness:
@@ -110,21 +110,21 @@ class UserSerializer(serializers.ModelSerializer):
         """
         # Check if any user has this email
         existing_email = User.objects.filter(email=value).first()
-        
+
         # If this is a new user (no instance)
         if not self.instance:
             if existing_email:
                 raise serializers.ValidationError('Duplicate email.')
-        
+
         # If this is an update (has instance)
         else:
             # If email exists AND it belongs to a DIFFERENT user
             if existing_email and existing_email.id != self.instance.id:
                 raise serializers.ValidationError('This email is already taken by another user.')
-        
+
         # Always return the value
         return value
-               
+
     def validate_password(self, value):
         """Changed name of built in and checking here"""
         try:
@@ -163,14 +163,14 @@ class UserSerializer(serializers.ModelSerializer):
         'title': {'validators': [ProfanityValidator()]},
         'description': {'validators': [ProfanityValidator()]}
     }
-    
+
     def validate_image(self, value):
         '''Image vaidation for jpg to be base64 format in seriliazer'''
         if value and not is_image_valid(value):
             raise ValidationError("Image could not be saved. Has to be jpg in base64 format.")
-        
+
         return value
-    
+
     def to_representation(self, instance):
         representation = super().to_representation(instance)
 
@@ -178,7 +178,7 @@ class UserSerializer(serializers.ModelSerializer):
             representation["image"] = DEFAULT_PROFILE_IMAGE_URL
 
         return representation
-    
+
     def update(self, instance, validated_data):
         '''To send updated version'''
         if "image" in validated_data.keys():
@@ -186,6 +186,3 @@ class UserSerializer(serializers.ModelSerializer):
                 os.remove(instance.image.path)
 
         return super().update(instance, validated_data)
-    
-    
-
