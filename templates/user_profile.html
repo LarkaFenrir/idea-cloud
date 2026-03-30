@@ -48,6 +48,7 @@
                 {% endif %}
                 </div>
                 </div>
+                <p>{{ user_profile.email }}</p>
                 {% if request.user == user_profile %}
                     <!-- probably the permissions will determine which user sees what-->
                     <div class="user-info"><a href="{% url 'front-end:favourite-projects' %}">Favourite Projects</a></div>
